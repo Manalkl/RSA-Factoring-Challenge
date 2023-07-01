@@ -1,33 +1,23 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "factor.h"
 
-/**
- * main - the main func
- *
- *
- * Return: void
- */
-int main(int argc, char *argv[])
+int factorize(char *buffer)
 {
-	FILE *fptr;
-	size_t count;
-	ssize_t line;
-	char *buffer = NULL;
+	uint32_t num;
+	uint32_t i;
 
+	num = atoi(buffer);
 
-	if (argc != 2)
+	for (i = 2; i < num; i++)
 	{
-		fprintf(stderr, "Usage: factor <filename>\n");
-		exit(EXIT_FAILURE);
+		if (num % i == 0)
+		{
+			printf("%d=%d*%d\n", num, num / i, i);
+			break;
+		}
 	}
-	fptr = fopen(argv[1], "r");
-	if (fptr == NULL)
-	{
-		fprintf(stderr, "Error: can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-	while ((line = getline(&buffer, &count, fptr)) != -1)
-	{
-		factorize(buffer);
-	}
-return (0);
+
+	return (0);
 }
